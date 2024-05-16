@@ -1,0 +1,45 @@
+{
+  "name": "express-with-websocket",
+  "version": "1.0.0",
+  "description": "framwork-nodejs",
+  "main": "main.js",
+  "scripts": {
+    "test": "cross-env NODE_ENV=test jest",
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "db:create": "npx sequelize-cli db:create",
+    "migrate": "npx sequelize-cli db:migrate",
+    "seeder": "npx sequelize-cli db:seed:all",
+    "migrate:fresh": "npx sequelize-cli db:migrate:undo:all"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "rest",
+    "api",
+    "sequelize",
+    "mysql"
+  ],
+  "author": "Joshué Agapé",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.8",
+    "bcrypt": "^5.1.1",
+    "chai": "^5.1.1",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "jest": "^29.7.0",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.9.7",
+    "nodemon": "^3.1.0",
+    "querystring": "^0.2.1",
+    "sequelize": "^6.37.3",
+    "sequelize-cli": "^6.6.2",
+    "socket.io": "^4.7.5",
+    "supertest": "^7.0.0",
+    "uuid": "^9.0.1"
+  }
+}
