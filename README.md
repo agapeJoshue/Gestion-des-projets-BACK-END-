@@ -13,12 +13,13 @@
 
 ## Utilisation
 
-Pour utiliser le ChatService la structure se deroule comme suit : 
+Pour utiliser le framwork nodejs + express + websoket.io la structure se deroule comme suit : 
 1. server.js le point d'entrée de l'application
 2. models/index.js gere tout les point d'entrée vers la creation de la base
 3. models/ le models du service
 4. app/controllers les controllers de l'api
 5. routes/groups toutes les routes de chaques controller
 6. routes/api.js le groupement de tout les routes dans route/groups
+7. app/services regroupes les fonctions que les controllers utilises
 
 

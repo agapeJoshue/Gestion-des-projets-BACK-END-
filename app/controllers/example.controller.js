@@ -1,13 +1,13 @@
 const db = require("../../models");
-const Users = db.users;
+const Users = db.Users;
 const { successResponse, errorResponse, } = require("../services/response.service");
 
 /**
  * Get all user 
- * @param {*} defis_users
- * @returns
+ * @param {*} req
+ * @param {*} res
  */
-exports.getAllDefis = async (req, res) => {
+exports.getAllUsers = async (req, res) => {
     try {
         const UserLists = await Users.findAll();
         res.status(200).send(successResponse(UserLists));

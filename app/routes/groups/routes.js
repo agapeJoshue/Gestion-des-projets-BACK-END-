@@ -1,10 +1,11 @@
 module.exports = (app , io) => {
     const controller = require("../../controllers/example.controller");
-    var router = require("express").Router();
+    var routes = require("express").Router();
    
     //  router.post("/", controller.routePost(io));
     //  router.get("/", controller.routeGet);
+    routes.get('/all', controller.getAllUsers);
   
-    app.use("/api", router);
+    app.use("/api", routes);
   };
   
