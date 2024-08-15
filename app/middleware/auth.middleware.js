@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const config = require("../config/config");
 const db = require("../../models");
-const User = db.users;
+const Users = db.Users;
 
 
 const authMiddleware = async (req, res, next) => {
@@ -27,7 +27,7 @@ const authMiddleware = async (req, res, next) => {
       }
     }
 
-    const user = await User.findOne({ where: { email: decodedToken.email } });
+    const user = await Users.findOne({ where: { email: decodedToken.email } });
     if (!user) {
       return res.status(404).json({ error: "Utilisateur non trouvé" });
     }
@@ -38,7 +38,5 @@ const authMiddleware = async (req, res, next) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-
-
 
 module.exports = authMiddleware;

@@ -13,7 +13,7 @@ const { sendEmail_initialize_password } = require("../services/email/email.servi
  */
 exports.index = async (req, res) => {
     try {
-        res.status(200).send(successResponse('Index Controller'));
+        res.status(200).send(successResponse('User connected.'));
     } catch (err) {
         res.status(500).send(errorResponse(err));
     }

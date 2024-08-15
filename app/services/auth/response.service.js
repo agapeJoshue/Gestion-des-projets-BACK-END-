@@ -1,9 +1,10 @@
 const config = require("../../config/config");
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt');
+const { dateFr, timeFr, frTime, frDate } = require("../date.service");
 
 exports.dataResponseAuth = async (user) => {
-    try{
+    try {
         const token = await jwt.sign({ email: user.email }, config.secretKey, {
             expiresIn: config.expiresIn,
         });
@@ -20,10 +21,12 @@ exports.dataResponseAuth = async (user) => {
             sexe: user.sexe,
             profile_path: user.profile_path,
             cover_path: user.cover_path,
+            createdAt_date: frDate(user.createdAt),
+            createdAt_time: frTime(user.createdAt),
         };
-        
+
         return formData
-    }catch(err){
+    } catch (err) {
         throw new Error(err.message);
     }
 }
