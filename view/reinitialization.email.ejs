@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .flex {
+            display: grid;
+            grid-template-columns: 6rem auto;
+            align-items: center;
+        }
+
+        .logo-app {
+            width: 60px;
+            height: 50px;
+        }
+
+        .app_name_title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: blue;
+        }
+
+        .title {
+            margin-top: 1.5rem;
+            margin-bottom: .8rem;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: rgb(82, 82, 82);
+        }
+
+        p {
+            font-size: .9rem;
+            font-weight: 500;
+            color: rgb(104, 104, 104);
+        }
+
+        p.c1 {
+            margin-bottom: .5rem;
+        }
+
+        .c2 {
+            margin-bottom: .9rem;
+        }
+
+        .code {
+            font-weight: 600;
+            color: rgb(20, 20, 204);
+        }
+
+        .username,
+        .app_name {
+            color: rgb(0, 136, 255);
+        }
+
+        a {
+            text-decoration: none;
+            color: rgb(0, 0, 255);
+            transition: all .3s ease;
+        }
+
+        a:hover {
+            color: rgb(0, 132, 255);
+        }
+
+        .danger {
+            color: red;
+        }
+
+        .logo-gmail {
+            position: absolute;
+            width: 100px;
+            right: 1rem;
+        }
+
+        .footer {
+            position: relative;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h3 class="title">Réinitialisation de mot de passe</h3>
+
+        <p class="c1">Utilisez ce lien pour réinitialiser le mot de passe du compte <span class="app_name">
+                <%= app_name %> '<%= mail %>'
+            </span>.</p>
+
+        <p class="c1">Voici votre lien de réinitialisation de mot de passe: <a href="<%= myURL %>" class="code">Cliquez
+                ici</a></p>
+
+        <p class="c2">Si vous ne reconnaissez pas le compte <span class="app_name">
+                <%= app_name %> '<%= mail %>'
+            </span>, vous pouvez <a href="#">cliquer ici</a> pour <span class="danger">supprimer ce compte</span>.</p>
+
+        <p class="c1">Merci,</p>
+        <p>L'équipe des comptes <span class="app_name">
+                <%= app_name %>
+            </span>.</p>
+    </div>
+</body>
+
+</html>

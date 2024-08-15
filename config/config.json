@@ -2,7 +2,7 @@
     "development": {
       "username": "root",
       "password": "",
-      "database": "exampleDB",
+      "database": "gestion_projets",
       "host": "localhost",
       "dialect": "mysql",
       "port": 3306
@@ -10,14 +10,14 @@
     "test": {
       "username": "root",
       "password": null,
-      "database": "exampleDB",
+      "database": "gestion_projets_test",
       "host": "127.0.0.1",
       "dialect": "mysql"
     },
     "production": {
       "username": "root",
       "password": null,
-      "database": "exampleDB",
+      "database": "gestionProjets",
       "host": "127.0.0.1",
       "dialect": "mysql"
     }

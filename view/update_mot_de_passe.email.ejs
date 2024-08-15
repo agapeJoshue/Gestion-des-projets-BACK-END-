@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .container {
+            padding: 20px;
+        }
+        
+        .flex {
+            display: grid;
+            grid-template-columns: 6rem auto;
+            align-items: center;
+        }
+        
+        .logo-app {
+            width: 60px;
+            height: 50px;
+        }
+        
+        .app_name_title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: blue;
+        }
+        
+        .title {
+            margin-top: 1.5rem;
+            margin-bottom: .8rem;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: rgb(82, 82, 82);
+        }
+        
+        p {
+            font-size: .9rem;
+            font-weight: 500;
+            color: rgb(104, 104, 104);
+        }
+        
+        p.c1 {
+            margin-bottom: .5rem;
+        }
+        
+        .c2 {
+            margin-bottom: .9rem;
+        }
+        
+        .code {
+            font-weight: 600;
+            color: rgb(20, 20, 204);
+        }
+        
+        .username,
+        .app_name {
+            color: rgb(0, 136, 255);
+        }
+        
+        a {
+            text-decoration: none;
+            color: rgb(0, 0, 255);
+            transition: all .3s ease;
+        }
+        
+        a:hover {
+            color: rgb(0, 132, 255);
+        }
+        
+        .danger {
+            color: red;
+        }
+        
+        .logo-gmail {
+            position: absolute;
+            width: 100px;
+            right: 1rem;
+        }
+        
+        .footer {
+            position: relative;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="flex">
+            <img src="/public/images/logo.png" alt="<%= app_name %>" class="logo-app">
+            <h3 class="app_name_title">
+                <%= app_name %>
+            </h3>
+        </div>
+
+        <h3 class="title">Votre mot de passe à été modifié</h3>
+
+        <p class="c1">Votre mot de passee pour le compte <span class="app_name"><%= app_name %> '<%= mail %>'</span> à été modifié le 23/11/2023.</p>
+        <p class="c1">Si c'était vous, vous pouvez alors ignorer ce message électronique.</p>
+        <p class="c2">Si ce n'était pas vous, la sécurité de votre compte a été compromise. Procédez comme suit:</p>
+        <ul>
+            <li>
+                <a href="#">Réinitialisez votre mot de passe.</a>
+            </li>
+            <li>
+                <a href="#">Vérifiez vos informations de sécurité.</a>
+            </li>
+            <li>
+                <a href="#">Découvrez comment renforcer la sécurité de votre compte.</a>
+            </li>
+        </ul>
+        <p class="c2">Vous pouvez également <a href="#"><span class="app_name">refuser</span></a> ou modifier l'endroit où vous recevez des notifications de sécurité.</p>
+        <div class="footer ">
+            <img src="/public/images/R.png " alt=" " class="logo-gmail ">
+        </div>
+    </div>
+</body>
+
+</html>
