@@ -9,19 +9,27 @@ const Sequelize = require('sequelize');
  */
 exports.findUserByUUID = async (participants) => {
     try {
-        const infoUser = {};
-        for (const participant of participants) {
-            const user = await Users.findOne({ 
+        const infoUser = await Promise.all(participants.map(async (participant) => {
+            const user = await Users.findOne({
                 where: { user_uuid: participant.user_uuid },
                 attributes: ["id", "user_uuid", "firstName", "lastName", "email", "role", "sexe", "profile_path", "cover_path", "isValidate"],
-             });
-            infoUser.push(user);
-        }
+            });
+            const firstName = user.firstName;
+            const indiceFirstName = firstName.charAt(0);
+            const lastName = user.lastName;
+            const indiceLastName = lastName.charAt(0);
+            const indice = `${indiceFirstName}${indiceLastName}`;
+            const username = `${firstName} ${lastName}`;
+            user.dataValues.indice = indice;
+            user.dataValues.username = username;
+            return user;
+        }));
         return infoUser;
     } catch (err) {
         throw new Error(err.message);
     }
 }
+
 
 
 /**
@@ -30,12 +38,12 @@ exports.findUserByUUID = async (participants) => {
  * @param {*} res
  */
 exports.findAllUsers = async () => {
-    try{
-        return await Users.findAll({ 
+    try {
+        return await Users.findAll({
             where: { isValidate: true },
             attributes: ["id", "user_uuid", "firstName", "lastName", "email", "role", "sexe", "profile_path", "cover_path", "isValidate"],
         });
-    }catch(err){
+    } catch (err) {
         throw new Error(err.message)
     }
 }
@@ -47,7 +55,7 @@ exports.findAllUsers = async () => {
  * @param {*} res
  */
 exports.findUsers = async (user_uuid) => {
-    try{
+    try {
         const users = await Users.findAll({
             where: {
                 user_uuid: {
@@ -56,8 +64,8 @@ exports.findUsers = async (user_uuid) => {
             },
             attributes: ["id", "user_uuid", "firstName", "lastName", "email", "role", "sexe", "profile_path", "cover_path", "isValidate"],
         });
-        
-        for(const user of users){
+
+        for (const user of users) {
             const firstName = user.firstName;
             const indiceFirstName = firstName.charAt(0);
             const lastName = user.lastName;
@@ -69,7 +77,7 @@ exports.findUsers = async (user_uuid) => {
         }
 
         return users
-    }catch(err){
+    } catch (err) {
         throw new Error(err.message);
     }
 }
@@ -81,12 +89,12 @@ exports.findUsers = async (user_uuid) => {
  * @param {*} res
  */
 exports.findOneUsers = async (user_uuid) => {
-    try{
+    try {
         return await Users.findOne({
             where: { isValidate: true, user_uuid },
             attributes: ["id", "user_uuid", "firstName", "lastName", "email", "role", "sexe", "profile_path", "cover_path", "isValidate"],
         });
-    }catch(err){
+    } catch (err) {
         throw new Error(err.message)
     }
 }
