@@ -48,13 +48,27 @@ exports.findAllUsers = async () => {
  */
 exports.findUsers = async (user_uuid) => {
     try{
-        return await Users.findAll({
+        const users = await Users.findAll({
             where: {
                 user_uuid: {
                     [Sequelize.Op.ne]: user_uuid
                 }
-            }
+            },
+            attributes: ["id", "user_uuid", "firstName", "lastName", "email", "role", "sexe", "profile_path", "cover_path", "isValidate"],
         });
+        
+        for(const user of users){
+            const firstName = user.firstName;
+            const indiceFirstName = firstName.charAt(0);
+            const lastName = user.lastName;
+            const indiceLastName = lastName.charAt(0);
+            const indice = `${indiceFirstName}${indiceLastName}`;
+            const username = `${firstName} ${lastName}`;
+            user.dataValues.indice = indice;
+            user.dataValues.username = username;
+        }
+
+        return users
     }catch(err){
         throw new Error(err.message);
     }

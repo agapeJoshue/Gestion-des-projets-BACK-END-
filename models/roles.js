@@ -11,11 +11,11 @@ module.exports = (sequelize, DataTypes) => {
   roles.init({
     role_title: {
       type: DataTypes.STRING,
-      unique: false
+      allowNull: false
     },
     role_description: {
       type: DataTypes.TEXT,
-      unique: false
+      allowNull: true
     },
   }, {
     sequelize,

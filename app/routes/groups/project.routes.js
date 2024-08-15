@@ -3,7 +3,8 @@ module.exports = (app, io) => {
     const middleware = require("../../middleware/auth.middleware");
     var routes = require("express").Router();
 
-    routes.get('/', middleware, projectController.getAllProject);
+    routes.get('/:user_uuid', middleware, projectController.getAllProject);
+    routes.get('/get-users/:user_uuid', middleware, projectController.findUsers);
     routes.get('/:project_uuid', middleware, projectController.findProject);
     routes.post('/create', middleware, projectController.createProject);
     routes.put('/update/:project_uuid', middleware, projectController.updateProject);

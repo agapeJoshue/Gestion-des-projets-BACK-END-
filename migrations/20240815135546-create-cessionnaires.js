@@ -13,11 +13,11 @@ module.exports = {
       },
       cycle_uuid: {
         type: Sequelize.UUID,
-        unique: true
+        allowNull: false
       },
       user_uuid: {
         type: Sequelize.UUID,
-        unique: true
+        allowNull: false
       },
       createdAt: {
         allowNull: false,

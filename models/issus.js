@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     cycle_uuid: {
       type: DataTypes.UUID,
-      unique: false
+      allowNull: false
     },
     user_uuid: {
       type: DataTypes.UUID,
@@ -26,35 +26,35 @@ module.exports = (sequelize, DataTypes) => {
     },
     project_uuid: {
       type: DataTypes.UUID,
-      unique: false
+      allowNull: false
     },
     issus_title: {
       type: DataTypes.STRING,
-      unique: false
+      allowNull: false
     },
     issus_description: {
       type: DataTypes.TEXT,
-      unique: true
+      allowNull: true
     },
     issus_dateDebut: {
       type: DataTypes.DATE,
-      unique: true
+      allowNull: true
     },
     issus_dateFin: {
       type: DataTypes.DATE,
-      unique: true
+      allowNull: true
     },
     issus_type: {
       type: DataTypes.INTEGER,
-      unique: true
+      allowNull: true
     },
     issus_priority: {
       type: DataTypes.INTEGER,
-      unique: true
+      allowNull: true
     },
     issus_status: {
       type: DataTypes.INTEGER,
-      unique: true
+      allowNull: true
     },
   }, {
     sequelize,

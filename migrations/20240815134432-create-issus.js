@@ -22,7 +22,7 @@ module.exports = {
       },
       cycle_uuid: {
         type: Sequelize.UUID,
-        unique: false
+        allowNull: false
       },
       user_uuid: {
         type: Sequelize.UUID,
@@ -30,35 +30,35 @@ module.exports = {
       },
       project_uuid: {
         type: Sequelize.UUID,
-        unique: false
+        allowNull: false
       },
       issus_title: {
         type: Sequelize.STRING,
-        unique: false
+        allowNull: true
       },
       issus_description: {
         type: Sequelize.TEXT,
-        unique: true
+        allowNull: true
       },
       issus_dateDebut: {
         type: Sequelize.DATE,
-        unique: true
+        allowNull: true
       },
       issus_dateFin: {
         type: Sequelize.DATE,
-        unique: true
+        allowNull: true
       },
       issus_type: {
         type: Sequelize.INTEGER,
-        unique: true
+        allowNull: true
       },
       issus_priority: {
         type: Sequelize.INTEGER,
-        unique: true
+        allowNull: true
       },
       issus_status: {
         type: Sequelize.INTEGER,
-        unique: true
+        allowNull: true
       },
       createdAt: {
         allowNull: false,

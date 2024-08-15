@@ -40,7 +40,7 @@ exports.sendEmail_Activation_account = async (to, name, code) => {
             pathLogo: pathLogo
         };
 
-        const emailHtml = await ejs.renderFile(path.join(__dirname, '../../../view/activate_account.email.ejs'), emailParams);
+        const emailHtml = await ejs.renderFile(path.join(__dirname, '../../view/activate_account.email.ejs'), emailParams);
 
         const mailOptions = {
             from: {
@@ -68,7 +68,7 @@ exports.sendEmail_initialize_password = async (userData, token) => {
         };
 
         const emailHtml = await ejs.renderFile(
-            path.join(__dirname, '../../../view/reinitialization.email.ejs'),
+            path.join(__dirname, '../../view/reinitialization.email.ejs'),
             emailParams
         );
 
@@ -98,7 +98,7 @@ exports.sendEmail_update_password = async (to) => {
             pathLogo: pathLogo
         };
 
-        const emailHtml = await ejs.renderFile(path.join(__dirname, '../../../view/update_mot_de_passe.email.ejs'), emailParams3);
+        const emailHtml = await ejs.renderFile(path.join(__dirname, '../../view/update_mot_de_passe.email.ejs'), emailParams3);
 
         const mailOptions = {
             from: {

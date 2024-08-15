@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const uuid = require('uuid');
 const { successResponse, errorResponse, } = require("../services/response.service");
 const { dataResponseAuth } = require("../services/auth/response.service");
-const { sendEmail_initialize_password } = require("../services/email/email.service");
+const { sendEmail_initialize_password } = require("../services/email.service");
 
 /**
  * index

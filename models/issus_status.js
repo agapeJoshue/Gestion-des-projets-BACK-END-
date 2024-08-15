@@ -11,11 +11,11 @@ module.exports = (sequelize, DataTypes) => {
   issus_status.init({
     etat: {
       type: DataTypes.STRING,
-      unique: false
+      allowNull: false
     },
     etat_icon: {
       type: DataTypes.STRING,
-      unique: true
+      allowNull: true
     },
   }, {
     sequelize,

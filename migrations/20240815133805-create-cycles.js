@@ -18,7 +18,7 @@ module.exports = {
       },
       project_uuid: {
         type: Sequelize.UUID,
-        unique: true
+        allowNull: false
       },
       title_cycle: {
         type: Sequelize.STRING,

@@ -11,11 +11,11 @@ module.exports = (sequelize, DataTypes) => {
   cessionnaires.init({
     cycle_uuid: {
       type: DataTypes.UUID,
-      unique: true
+      allowNull: false
     },
     user_uuid: {
       type: DataTypes.UUID,
-      unique: true
+      allowNull: false
     },
   }, {
     sequelize,

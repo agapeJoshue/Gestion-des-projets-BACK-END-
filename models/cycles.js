@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     project_uuid: {
       type: DataTypes.UUID,
-      unique: true
+      allowNull: false
     },
     title_cycle: {
       type: DataTypes.STRING,

@@ -10,7 +10,6 @@ module.exports = (sequelize, DataTypes) => {
   participants.init({
     project_uuid: {
       type: DataTypes.UUID,
-      unique: true
     },
     user_uuid: {
       type: DataTypes.UUID,

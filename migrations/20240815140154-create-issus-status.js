@@ -11,11 +11,11 @@ module.exports = {
       },
       etat: {
         type: Sequelize.STRING,
-        unique: false
+        allowNull: false,
       },
       etat_icon: {
         type: Sequelize.STRING,
-        unique: true
+        allowNull: true,
       },
       createdAt: {
         allowNull: false,

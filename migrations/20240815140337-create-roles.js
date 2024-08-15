@@ -11,11 +11,11 @@ module.exports = {
       },
       role_title: {
         type: Sequelize.STRING,
-        unique: false
+        allowNull: true,
       },
       role_description: {
         type: Sequelize.TEXT,
-        unique: false
+        allowNull: true,
       },
       createdAt: {
         allowNull: false,

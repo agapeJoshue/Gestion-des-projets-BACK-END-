@@ -1,9 +1,9 @@
 const db = require("../../models");
-const project = db.Projects;
+const PROJECT = db.Projects;
 const participants = db.participants;
 const uuid = require('uuid');
 const { successResponse, errorResponse, } = require("../services/response.service");
-const { findUserByUUID } = require("../services/users.service");
+const { findUserByUUID, findUsers } = require("../services/users.service");
 
 /**
  * find all project
@@ -12,7 +12,7 @@ const { findUserByUUID } = require("../services/users.service");
  */
 exports.getAllProject = async (req, res) => {
     try {
-        const projects = await project.findAll({ where: { isDeleted: false } });
+        const projects = await PROJECT.findAll({ where: { isDeleted: false } });
         if (!projects) {
             return res.status(404).send(errorResponse({ message: "No project found or database is empty." }));
         }
@@ -29,6 +29,27 @@ exports.getAllProject = async (req, res) => {
 
 
 /**
+ * find users
+ * @param {*} req
+ * @param {*} res
+ */
+exports.findUsers = async (req, res) => {
+    try {
+        const { user_uuid } = req.params;
+
+        const users = await findUsers(user_uuid);
+        if(!users){
+            return res.send(errorResponse({ message: "Users not found!" }));
+        }
+
+        return res.status(200).send(successResponse({ message: "Lists users", users }));
+    } catch (err) {
+        return res.status(500).send(errorResponse({ message: err.message }));
+    }
+}
+
+
+/**
  * find project by project UUID
  * @param {*} req
  * @param {*} res
@@ -36,7 +57,7 @@ exports.getAllProject = async (req, res) => {
 exports.findProject = async (req, res) => {
     try {
         const { project_uuid } = req.params;
-        const project = await project.findOne({ where: { isDeleted: false, project_uuid } });
+        const project = await PROJECT.findOne({ where: { isDeleted: false, project_uuid } });
         if (!project) {
             return res.status(404).send(errorResponse({ message: "No project found or database is empty." }));
         }
@@ -67,10 +88,12 @@ exports.createProject = async (req, res) => {
         if (req.body.theme) newProject.theme = req.body.theme;
         if (req.body.description) newProject.description = req.body.description;
 
-        await project.create(newProject);
-
         const users = req.body.participants;
         users.push(req.body.user_uuid);
+
+        console.log(users);
+
+        await PROJECT.create(newProject);
 
         for (const user_uuid of users) {
             await participants.create({ project_uuid: newUUID, user_uuid });
@@ -93,7 +116,7 @@ exports.updateProject = async (req, res) => {
         const newData = {};
         const { project_uuid } = req.params;
 
-        const project = await project.findOne({ where: { project_uuid } });
+        const project = await PROJECT.findOne({ where: { project_uuid } });
         if (!project) {
             return res.send(errorResponse({ message: "Project not found" }));
         }
@@ -123,14 +146,14 @@ exports.destroyProject = async (req, res) => {
     try {
         const { project_uuid } = req.params;
 
-        const project = await project.findOne({ where: { project_uuid } });
+        const project = await PROJECT.findOne({ where: { project_uuid } });
         if (!project) {
             return res.send(errorResponse({ message: "Project not found" }));
         }
 
         await participants.destroy({ where: { project_uuid } });
 
-        await project.destroy({ where: { project_uuid } });
+        await PROJECT.destroy({ where: { project_uuid } });
 
         return res.status(200).send(successResponse({ message: "Project deleted successfully." }));
     } catch (err) {
