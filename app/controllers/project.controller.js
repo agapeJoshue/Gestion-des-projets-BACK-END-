@@ -20,35 +20,40 @@ exports.getAllProject = async (req, res) => {
         });
 
         if (projects.length === 0) {
-            return res.send(errorResponse({ message: "No project found or database is empty." }));
+            return res.status(404).send(errorResponse({ message: "No project found or database is empty." }));
         }
 
-        const projectData = await Promise.all(projects.map(async (project) => {
-            const projectInfo = await PROJECT.findOne({
-                where: { isDeleted: false, project_uuid: project.project_uuid }
-            });
+        const projectData = await Promise.all(
+            projects.map(async (project) => {
+                const projectInfo = await PROJECT.findOne({
+                    where: { isDeleted: false, project_uuid: project.project_uuid },
+                });
 
-            if (!projectInfo) {
-                return null; 
-            }
+                if (!projectInfo) {
+                    return null;
+                }
 
-            const userParticipants = await participants.findAll({
-                where: { project_uuid: project.project_uuid }
-            });
+                projectInfo.dataValues.idAdmin = projectInfo.user_uuid === user_uuid;
 
-            const user = await findUserByUUID(userParticipants);
-            projectInfo.dataValues.infoParticipants = user;
+                const userParticipants = await participants.findAll({
+                    where: { project_uuid: project.project_uuid },
+                });
 
-            return projectInfo.dataValues;
-        }));
+                const user = await findUserByUUID(userParticipants);
+                projectInfo.dataValues.infoParticipants = user;
 
-        const filteredProjectData = projectData.filter(data => data !== null);
+                return projectInfo.dataValues;
+            })
+        );
+
+        const filteredProjectData = projectData.filter((data) => data !== null);
 
         return res.status(200).send(successResponse({ message: "List of all projects", projectData: filteredProjectData }));
     } catch (err) {
         return res.status(500).send(errorResponse({ message: err.message }));
     }
-}
+};
+
 
 
 
@@ -115,8 +120,6 @@ exports.createProject = async (req, res) => {
         const users = req.body.participants;
         users.push(req.body.user_uuid);
 
-        console.log(users);
-
         await PROJECT.create(newProject);
 
         for (const user_uuid of users) {
@@ -151,6 +154,7 @@ exports.updateProject = async (req, res) => {
         if (req.body.description) newData.description = req.body.description;
         if (req.body.status) newData.status = req.body.status;
         if (req.body.isDeleted) newData.isDeleted = req.body.isDeleted;
+        console.log(newData);
 
         await project.update(newData, { where: { project_uuid } });
 
@@ -179,7 +183,7 @@ exports.destroyProject = async (req, res) => {
 
         await PROJECT.destroy({ where: { project_uuid } });
 
-        return res.status(200).send(successResponse({ message: "Project deleted successfully." }));
+        return res.status(200).send(successResponse({ message: "Project destroyed successfully." }));
     } catch (err) {
         return res.status(500).send(errorResponse({ message: err.message }));
     }
