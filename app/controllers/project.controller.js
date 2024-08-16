@@ -54,8 +54,25 @@ exports.getAllProject = async (req, res) => {
     }
 };
 
+/**
+ * find all project
+ * @param {*} req
+ * @param {*} res
+ */
+exports.getProjectUser = async (req, res) => {
+    try {
+        const { user_uuid } = req.params;
 
+        const projects = await PROJECT.findAll({ where: { user_uuid } });
+        if (!projects) {
+            return res.send(errorResponse({ message: "No project found or database is empty!" }));
+        }
 
+        return res.status(200).send(successResponse({ message: "List of all projects", projectData: projects }));
+    } catch (err) {
+        return res.status(500).send(errorResponse({ message: err.message }));
+    }
+};
 
 /**
  * find users
@@ -76,7 +93,6 @@ exports.findUsers = async (req, res) => {
         return res.status(500).send(errorResponse({ message: err.message }));
     }
 }
-
 
 /**
  * find project by project UUID
@@ -100,7 +116,6 @@ exports.findProject = async (req, res) => {
     }
 }
 
-
 /**
  * Create a new project
  * @param {*} req
@@ -120,6 +135,11 @@ exports.createProject = async (req, res) => {
         const users = req.body.participants;
         users.push(req.body.user_uuid);
 
+        const project = await PROJECT.findAll({ where: { identifiant: req.body.identifiant } });
+        if (project.length > 0) {
+            return res.status(401).send(errorResponse({ message: "Identifiant is not accepted, it's already used by another project." }));
+        }
+
         await PROJECT.create(newProject);
 
         for (const user_uuid of users) {
@@ -131,7 +151,6 @@ exports.createProject = async (req, res) => {
         return res.status(500).send(errorResponse({ message: err.message }));
     }
 }
-
 
 /**
  * find project by project UUID
@@ -163,7 +182,6 @@ exports.updateProject = async (req, res) => {
         return res.status(500).send(errorResponse({ message: err.message }));
     }
 }
-
 
 /**
  * find project by project UUID

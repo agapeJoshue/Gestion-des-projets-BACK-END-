@@ -26,15 +26,15 @@ module.exports = {
       },
       description_cycle: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       date_debut: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: true
       },
       date_fin: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: true
       },
       createdBy: {
         type: Sequelize.UUID,

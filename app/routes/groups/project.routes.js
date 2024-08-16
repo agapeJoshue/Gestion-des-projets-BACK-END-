@@ -4,6 +4,7 @@ module.exports = (app, io) => {
     var routes = require("express").Router();
 
     routes.get('/:user_uuid', middleware, projectController.getAllProject);
+    routes.get('/get-project/:user_uuid', middleware, projectController.getProjectUser);
     routes.get('/get-users/:user_uuid', middleware, projectController.findUsers);
     routes.get('/:project_uuid', middleware, projectController.findProject);
     routes.post('/create', middleware, projectController.createProject);
